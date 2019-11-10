@@ -2,15 +2,6 @@
 
 public class Computer : Entity
 {
-    public new void Update()
-    {
-        base.Update();
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            Move(6);
-        }
-    }
-    
     protected override Vector3 GetNextLocation()
     {
         Vector3 currentTransform = GetComponent<Transform>().localPosition;

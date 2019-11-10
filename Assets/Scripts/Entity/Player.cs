@@ -1,16 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Entity
 {
-    public new void Update()
+    private GameObject _text;
+
+    private void Start()
     {
-        base.Update();
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            Move(6);
-        }
+        _text = GameObject.Find("Description");
     }
-    
+
     protected override Vector3 GetNextLocation()
     {
         Vector3 currentTransform = GetComponent<Transform>().localPosition;
