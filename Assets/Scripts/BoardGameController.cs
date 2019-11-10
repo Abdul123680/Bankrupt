@@ -7,9 +7,9 @@ using Random = UnityEngine.Random;
 public class BoardGameController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject bigCard;
+    private CardObject bigCard;
     [SerializeField]
-    private GameObject smallCard;
+    private CardObject smallCard;
 
     [SerializeField]
     private Sprite[] staticSprites;
@@ -18,8 +18,9 @@ public class BoardGameController : MonoBehaviour
     
     void Start()
     {
+        int cardIndex = 0;
         Transform parent = GameObject.Find("Board").GetComponent<Transform>();
-        GameObject newCard;
+        CardObject newCard;
         SpriteRenderer renderer;
         float x = -3.666667f, y = 0.1000013f, z = -3.666667f;
         for (int bottomIndex = 0; bottomIndex < 5; ++bottomIndex)
@@ -48,6 +49,9 @@ public class BoardGameController : MonoBehaviour
                 newCard.GetComponent<Transform>().localPosition = new Vector3(x, y, z);
                 x += bottomIndex == 3 ? 2 : 1.666667f;
             }
+
+            newCard.Type = CardObject.getCardType(newCard.GetComponent<SpriteRenderer>().sprite.name);
+            World.Instance.Cards[cardIndex++] = newCard;
         }
 
         x = -3.666667f;
@@ -83,6 +87,8 @@ public class BoardGameController : MonoBehaviour
                 x += topIndex == 3 ? 2 : 1.666667f;
             }
             newTransform.Rotate(new Vector3(180, 0, 0));
+            newCard.Type = CardObject.getCardType(newCard.GetComponent<SpriteRenderer>().sprite.name);
+            World.Instance.Cards[cardIndex++] = newCard;
         }
         
         x = -3.666667f;
@@ -98,6 +104,8 @@ public class BoardGameController : MonoBehaviour
             newTransform.localPosition = new Vector3(x, y, z);
             z += 1.55f;
             newTransform.Rotate(new Vector3(0, 0, -90));
+            newCard.Type = CardObject.getCardType(newCard.GetComponent<SpriteRenderer>().sprite.name);
+            World.Instance.Cards[cardIndex++] = newCard;
         }
         
         x = 3.666667f;
@@ -113,6 +121,8 @@ public class BoardGameController : MonoBehaviour
             newTransform.localPosition = new Vector3(x, y, z);
             z += 1.55f;
             newTransform.Rotate(new Vector3(0, 0, 90));
+            newCard.Type = CardObject.getCardType(newCard.GetComponent<SpriteRenderer>().sprite.name);
+            World.Instance.Cards[cardIndex++] = newCard;
         }
     }
 
